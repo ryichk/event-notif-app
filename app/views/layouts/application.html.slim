@@ -9,4 +9,7 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    = yield
+    header.navbar.navbar-expand-sm.navbar-light.bg-light.container
+      = link_to 'EventNotifApp', root_path, class: 'navbar-brand'
+    .container
+      = yield
