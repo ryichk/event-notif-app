@@ -13,6 +13,8 @@ html
       .container
         = link_to 'EventNotifApp', root_path, class: 'navbar-brand mr-auto'
         ul.navbar-nav
+          li.nav-item
+            = link_to 'イベント作成', new_event_path, class: 'nav-link'
           - if logged_in?
             li.nav-item
               = button_to 'ログアウト', logout_path, class: 'btn btn-secondary', method: :delete
@@ -23,4 +25,7 @@ html
       - if flash.notice
         .alert.alert-success
           = flash.notice
+      - if flash.alert
+        .alert.alert-danger
+          = flash.alert
       = yield
