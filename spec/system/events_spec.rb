@@ -46,4 +46,30 @@ RSpec.describe Event, type: :system do
     button = find_button '登録する'
     expect(button['type']).to eq 'submit'
   end
+
+  it '/events/newページでフォームへ入力して登録' do
+    sign_in_as(FactoryBot.create(:user))
+    visit new_event_path
+
+    fill_in '名前', with: 'Rails code reading'
+    fill_in '場所', with: '東京'
+    fill_in '内容', with: 'Rails6のコードを読みます。'
+
+    start_at = Time.current
+    select start_at.strftime('%Y'), from: 'event_start_at_1i'
+    select I18n.l(start_at, format: '%B'), from: 'event_start_at_2i'
+    select start_at.strftime('%-d'), from: 'event_start_at_3i'
+    select start_at.strftime('%H'), from: 'event_start_at_4i'
+    select start_at.strftime('%M'), from: 'event_start_at_5i'
+
+    end_at = start_at + 1.hour
+    select end_at.strftime('%Y'), from: 'event_end_at_1i'
+    select I18n.l(end_at, format: '%B'), from: 'event_end_at_2i'
+    select end_at.strftime('%-d'), from: 'event_end_at_3i'
+    select end_at.strftime('%H'), from: 'event_end_at_4i'
+    select end_at.strftime('%M'), from: 'event_end_at_5i'
+
+    click_on '登録する'
+    assert_selector 'div.alert', text: '作成完了'
+  end
 end
