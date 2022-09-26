@@ -64,4 +64,6 @@ RSpec.configure do |config|
 
   OmniAuth.config.test_mode = true
   config.include SignInHelper
+
+  config.include ActiveSupport::Testing::TimeHelpers
 end
