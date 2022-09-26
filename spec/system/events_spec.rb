@@ -72,4 +72,17 @@ RSpec.describe Event, type: :system do
     click_on '登録する'
     assert_selector 'div.alert', text: '作成完了'
   end
+
+  it '/events/:idページで削除ボタンを押す' do
+    sign_in_as(FactoryBot.create(:user))
+    event = FactoryBot.create(:event, owner: current_user)
+
+    visit event_path(event)
+    count = Event.count
+    accept_confirm do
+      click_on 'イベント削除'
+    end
+    assert_selector 'div.alert', text: '削除完了'
+    expect(Event.count).to eq count - 1
+  end
 end
