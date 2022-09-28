@@ -1,0 +1,8 @@
+development:
+  ELASTICSEARCH_URL: http://0.0.0.0:9200
+
+test:
+  ELASTICSEARCH_URL: http://localhost:9200
+
+production:
+  ELASTICSEARCH_URL: http://localhost:9200

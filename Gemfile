@@ -36,8 +36,9 @@ gem 'omniauth-github', '~> 1.4.0'
 gem 'omniauth-rails_csrf_protection', '~> 0.1.2'
 
 gem 'rails-i18n', '~>6.0.0'
-
 gem 'kaminari', '~> 1.2.0'
+gem 'searchkick'
+gem 'elasticsearch', '7.16.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
