@@ -13,8 +13,8 @@ RSpec.describe 'Welcome Page', type: :system do
 
     travel_to Time.zone.now + 1.day do
       visit root_path
-      assert_selector 'h5', text: future_event.name
-      assert_no_selector 'h5', text: past_event.name
+      has_text?(future_event.name)
+      has_no_text?(past_event.name)
     end
   end
 end
