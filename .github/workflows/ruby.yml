@@ -33,7 +33,19 @@ jobs:
       with:
         ruby-version: 3.1
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Run tests
+    - name: Configure sysctl limits
+      run: |
+        sudo swapoff -a
+        sudo sysctl -w vm.swappiness=1
+        sudo sysctl -w fs.file-max=262144
+        sudo sysctl -w vm.max_map_count=262144
+    - name: Run Elasticsearch
+      uses: ryichk/elasticsearch-with-plugins-action@v1
+      with:
+        stack-version: 7.16.3
+        plugins: |
+          analysis-kuromoji
+    - name: Build and test
       env:
         RAILS_ENV: test
       run: |
