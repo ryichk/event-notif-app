@@ -20,9 +20,7 @@ RSpec.describe "Events", type: :request do
       sign_in_as sign_in_user
 
       count = Event.count
-      assert_raises(ActiveRecord::RecordNotFound) do
-        delete event_path(event)
-      end
+      delete event_path(event)
       expect(Event.count).to eq count
     end
   end
