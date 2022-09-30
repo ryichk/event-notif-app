@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Event < ApplicationRecord
   searchkick language: 'japanese'
 
@@ -16,22 +18,23 @@ class Event < ApplicationRecord
   validates :end_at, presence: true
   validate :start_at_should_be_before_end_at
   validates :image,
-    content_type: [:png, :jpg, :jpeg],
-    size: { less_than_or_equal_to: 10.megabytes },
-    dimension: { width: { max: 2000 }, height: { max: 2000 } }
+            content_type: %i[png jpg jpeg],
+            size: { less_than_or_equal_to: 10.megabytes },
+            dimension: { width: { max: 2000 }, height: { max: 2000 } }
 
   def created_by?(user)
     return false unless user
+
     owner_id == user.id
   end
 
   def search_data
     {
-      name: name,
-      place: place,
-      content: content,
+      name:,
+      place:,
+      content:,
       owner_name: owner&.name,
-      start_at: start_at
+      start_at:
     }
   end
 
@@ -40,9 +43,7 @@ class Event < ApplicationRecord
   def start_at_should_be_before_end_at
     return unless start_at && end_at
 
-    if start_at >= end_at
-      errors.add(:start_at, 'は終了時刻よりも前に設定してください')
-    end
+    errors.add(:start_at, 'は終了時刻よりも前に設定してください') if start_at >= end_at
   end
 
   def remove_image_if_user_accept

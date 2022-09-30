@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   before_destroy :check_all_events_finished
 
@@ -11,7 +13,7 @@ class User < ApplicationRecord
     nickname = auth_hash[:info][:nickname]
     image = auth_hash[:info][:image]
 
-    User.find_or_create_by!(provider: provider, uid: uid) do |user|
+    User.find_or_create_by!(provider:, uid:) do |user|
       user.name = nickname
       user.image_url = image
     end
@@ -21,14 +23,12 @@ class User < ApplicationRecord
 
   def check_all_events_finished
     now = Time.zone.now
-    if created_events.where(':now < end_at', now: now).exists?
+    if created_events.where(':now < end_at', now:).exists?
       errors[:base] << '公開中の未終了イベントが存在します。'
-    end
-
-    if participating_events.where(':now < end_at', now: now).exists?
+      throw(:abort)
+    elsif participating_events.where(':now < end_at', now:).exists?
       errors[:base] << '未終了の参加イベントが存在します。'
+      throw(:abort)
     end
-
-    throw(:abort) unless errors.empty?
   end
 end

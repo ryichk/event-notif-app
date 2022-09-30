@@ -1,0 +1,16 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+Style/Documentation:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+MethodLength:
+  CountComments: false
+  Max: 20
+
+Metrics/BlockLength:
+  Enabled: false

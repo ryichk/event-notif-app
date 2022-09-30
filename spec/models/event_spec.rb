@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
@@ -6,7 +8,7 @@ RSpec.describe Event, type: :model do
   context 'validations' do
     it 'nameの文字数が50より大きい場合validation error' do
       name = 'a' * 51
-      event = FactoryBot.build(:event, name: name)
+      event = FactoryBot.build(:event, name:)
       event.valid?
       expect(event.errors[:name]).not_to be_empty
     end
@@ -19,7 +21,7 @@ RSpec.describe Event, type: :model do
 
     it 'placeの文字数が100より大きい場合validation error' do
       place = 'a' * 101
-      event = FactoryBot.build(:event, place: place)
+      event = FactoryBot.build(:event, place:)
       event.valid?
       expect(event.errors[:place]).not_to be_empty
     end
@@ -32,7 +34,7 @@ RSpec.describe Event, type: :model do
 
     it 'contentの文字数が2000より大きい場合validation error' do
       content = 'a' * 2001
-      event = FactoryBot.build(:event, content: content)
+      event = FactoryBot.build(:event, content:)
       event.valid?
       expect(event.errors[:content]).not_to be_empty
     end
@@ -46,7 +48,7 @@ RSpec.describe Event, type: :model do
     it 'start_at_should_be_before_end_at validation OK' do
       start_at = rand(1..30).days.from_now
       end_at = start_at + rand(1..30).hours
-      event = FactoryBot.build(:event, start_at: start_at, end_at: end_at)
+      event = FactoryBot.build(:event, start_at:, end_at:)
       event.valid?
       expect(event.valid?).to eq true
     end
@@ -54,7 +56,7 @@ RSpec.describe Event, type: :model do
     it 'start_at_should_be_before_end_at validation error' do
       start_at = rand(1..30).days.from_now
       end_at = start_at - rand(1..30).hours
-      event = FactoryBot.build(:event, start_at: start_at, end_at: end_at)
+      event = FactoryBot.build(:event, start_at:, end_at:)
       event.valid?
       expect(event.errors[:start_at]).not_to be_empty
     end
