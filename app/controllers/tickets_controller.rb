@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TicketsController < ApplicationController
   def new
     raise ActionController::RoutingError, 'ログイン状態でTicketsController#newにアクセス'
@@ -9,9 +11,7 @@ class TicketsController < ApplicationController
       t.event = event
       t.comment = params[:ticket][:comment]
     end
-    if @ticket.save
-      redirect_to event, notice: "#{event.name}への参加表明が完了しました"
-    end
+    redirect_to event, notice: "#{event.name}への参加表明が完了しました" if @ticket.save
   end
 
   def destroy

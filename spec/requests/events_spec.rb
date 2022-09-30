@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Events", type: :request do
-  describe "DELETE /events/:id" do
+RSpec.describe 'Events', type: :request do
+  describe 'DELETE /events/:id' do
     it '自ら作成したイベントは削除できる' do
       event_owner = FactoryBot.create(:user)
       event = FactoryBot.create(:event, owner: event_owner)
