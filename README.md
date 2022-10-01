@@ -1,24 +1,43 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: 3.1.2
 
-Things you may want to cover:
+* Rails version: 6.0.6
 
-* Ruby version
+* Elasticsearch version: 7.16.3
 
-* System dependencies
+## Bundle install
 
-* Configuration
+```sh
+bundle install
+```
 
-* Database creation
+## DB及びテーブルの作成
 
-* Database initialization
+```sh
+bin/rails db:migrate
+```
 
-* How to run the test suite
+## Railsサーバー起動
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+bin/rails s
+```
 
-* Deployment instructions
+## Elasticsearch起動
 
-* ...
+```sh
+docker-compose up
+```
+
+## 自動テストの実行
+
+```sh
+bundle exec rspec
+```
+
+## 静的解析
+
+```sh
+bundle exec rubocop
+```
