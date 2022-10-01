@@ -64,6 +64,7 @@ group :development do
   gem 'rubocop-rails', require: false
 
   gem 'brakeman'
+  gem 'rack-mini-profiler', require: false
 end
 
 group :test do
